@@ -11,17 +11,22 @@
 #define STRCMP(a, b) printf("`%s`:`%s` = %d (%d)\n", a, b, ft_strcmp(a, b), strcmp(a, b));
 #define WRITE(s, x) printf("\t-\t%ld (`%s`:%ld)\n", ft_write(STDOUT_FILENO, s, x), s, x);
 
+#define READ(b, x)                        \
+    r = ft_read(STDIN_FILENO, buffer, x); \
+    printf("`%s`:%ld\n", buffer, r);
+
 void print_section(const char *title);
 
 int main(void)
 {
     // char *null = 0;
-    // int i;
-    // char buffer[100];
+    long r;
+    int i;
+    char buffer[100];
 
-    // i = 0;
-    // while (i < 100)
-    //     buffer[i++] = 0;
+    i = 0;
+    while (i < 100)
+        buffer[i++] = 0;
 
     // print_section("ft_strlen");
     // STRLEN("\t")
@@ -51,11 +56,20 @@ int main(void)
     // printf("`%s`:`%s` = %d\n", null, null, ft_strcmp(null, null));
     // print_section("done");
 
-    print_section("ft_write");
-    WRITE("toto", 4L)
-    WRITE("totototo", 4L)
-    WRITE("totototo", 8L)
-    WRITE("toto", 2L)
+    // print_section("ft_write");
+    // WRITE("toto", 4L)
+    // WRITE("totototo", 4L)
+    // WRITE("totototo", 8L)
+    // WRITE("toto", 2L)
+    // print_section("done");
+
+    print_section("ft_read");
+    READ(buffer, 50)
+    READ(buffer, 25)
+    READ(buffer, 4)
+    READ(buffer, 26)
+    READ(buffer, 14)
+    READ(buffer, 0)
     print_section("done");
 
     return (0);
