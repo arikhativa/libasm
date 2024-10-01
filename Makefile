@@ -7,7 +7,7 @@ SRCS		=	ft_strlen.s \
 				ft_strcmp.s \
 				ft_write.s \
 				ft_read.s \
-				# ft_strdup.s
+				ft_strdup.s
 
 OBJS		=	$(SRCS:.s=.o)
 
@@ -25,7 +25,8 @@ LD_FLAGS	=	-m elf_x86_64
 TEST		=	test
 TEST_BONUS	=	test_bonus
 CC			=	gcc
-CFLAGS 		=	-Wall -Werror -Wextra
+CFLAGS 		=	-no-pie # TODO
+# CFLAGS 		=	-Wall -Werror -Wextra -fPIE
 ARFLAGS 	=	rc
 RMFLAGS 	=	-rf
 
@@ -46,14 +47,14 @@ fclean: clean
 re: fclean $(NAME)
 
 test: $(NAME)
-	$(CC) $(FLAGS) -o $(TEST) main.c -L. -lasm
+	$(CC) $(CFLAGS) -o $(TEST) main.c -L. -lasm 
 	./$(TEST)
 
 bonus: $(OBJS) $(BONUS_OBJS)
 	$(AR) rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 test_bonus: bonus
-	$(CC) $(FLAGS) -L. -lasm -o $(TEST_BONUS) main_bonus.c
+	$(CC) $(CFLAGS) -L. -lasm -o $(TEST_BONUS) main_bonus.c
 	./$(TEST_BONUS)
 
 .PHONY: clean fclean re test bonus test_bonus

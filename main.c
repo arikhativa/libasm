@@ -15,14 +15,22 @@
     r = ft_read(STDIN_FILENO, buffer, x); \
     printf("`%s`:%ld\n", buffer, r);
 
+#define DUP(s)                       \
+    tmp = ft_strdup(s);              \
+    printf("`%s` (`%s`)\n", tmp, s); \
+    free(tmp);                       \
+    tmp = NULL;
+
 void print_section(const char *title);
 
 int main(void)
 {
-    // char *null = 0;
+    char *null = 0;
     long r;
     int i;
     char buffer[100];
+    char *tmp;
+    char *tmp2;
 
     i = 0;
     while (i < 100)
@@ -63,13 +71,26 @@ int main(void)
     // WRITE("toto", 2L)
     // print_section("done");
 
-    print_section("ft_read");
-    READ(buffer, 50)
-    READ(buffer, 25)
-    READ(buffer, 4)
-    READ(buffer, 26)
-    READ(buffer, 14)
-    READ(buffer, 0)
+    // print_section("ft_read");
+    // READ(buffer, 50)
+    // READ(buffer, 25)
+    // READ(buffer, 4)
+    // READ(buffer, 26)
+    // READ(buffer, 14)
+    // READ(buffer, 0)
+    // print_section("done");
+
+    print_section("ft_strdup");
+    tmp2 = ft_strdup("toto");
+    printf("%s\n", tmp2);
+    // printf("%d\n", (int)tmp2);
+    // printf("%s\n", tmp2);
+    // DUP(tmp2)
+    // free(tmp2);
+    // DUP("totobar")
+    // DUP("long message")
+    // DUP("")
+    // DUP(NULL)
     print_section("done");
 
     return (0);
