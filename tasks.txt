@@ -1,0 +1,2 @@
+You must check for errors during syscalls and properly set them when needed
+Your code must set the variable errno properly.
