@@ -1,4 +1,4 @@
-.o
-.a
+*.o
+*.a
 test
 test_bonus

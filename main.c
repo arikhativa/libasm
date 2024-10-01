@@ -8,33 +8,46 @@
 
 #define SECTION(x) printf(" --------- %s ---------\n", x);
 #define STRLEN(x) printf("`%s` = %d (%d)\n", x, ft_strlen(x), (int)strlen(x));
+#define STRCMP(a, b) printf("`%s`:`%s` = %d (%d)\n", a, b, ft_strcmp(a, b), strcmp(a, b));
 
 void print_section(const char *title);
 
 int main(void)
 {
-    int i;
-    char buffer[100];
+    // int i;
+    // char buffer[100];
 
-    i = 0;
-    while (i < 100)
-        buffer[i++] = 0;
+    // i = 0;
+    // while (i < 100)
+    //     buffer[i++] = 0;
 
-    print_section("ft_strlen");
-    STRLEN("\t")
-    STRLEN("")
-    STRLEN("toto")
-    STRLEN("totototo")
-    STRLEN("0123456789abcdef")
-    STRLEN("42")
-    STRLEN("1")
-    print_section("done");
+    // print_section("ft_strlen");
+    // STRLEN("\t")
+    // STRLEN("")
+    // STRLEN("toto")
+    // STRLEN("totototo")
+    // STRLEN("0123456789abcdef")
+    // STRLEN("42")
+    // STRLEN("1")
+    // print_section("done");
 
-    print_section("ft_strcpy");
-    printf("`%s` (`toto`)\n", ft_strcpy(buffer, "toto"));
-    printf("`%s` (empty)\n", ft_strcpy(buffer, ""));
-    printf("`%s` (`long message`)\n", ft_strcpy(buffer, "long message"));
-    printf("`%s` (NULL)\n", ft_strcpy(buffer, NULL));
+    // print_section("ft_strcpy");
+    // printf("`%s` (`toto`)\n", ft_strcpy(buffer, "toto"));
+    // printf("`%s` (empty)\n", ft_strcpy(buffer, ""));
+    // printf("`%s` (`long message`)\n", ft_strcpy(buffer, "long message"));
+    // printf("`%s` (NULL)\n", ft_strcpy(buffer, NULL));
+    // print_section("done");
+
+    char *null = 0;
+    print_section("ft_strcmp");
+    STRCMP("", "");
+    STRCMP("toto", "toto");
+    STRCMP("", "toto");
+    STRCMP("toto", "");
+    STRCMP("toto", "totobar")
+    printf("`%s`:`%s` = %d\n", "TOTO", null, ft_strcmp("TOTO", null));
+    printf("`%s`:`%s` = %d\n", null, "TOTO", ft_strcmp(null, "TOTO"));
+    printf("`%s`:`%s` = %d\n", null, null, ft_strcmp(null, null));
     print_section("done");
 
     return (0);
