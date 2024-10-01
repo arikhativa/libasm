@@ -9,11 +9,13 @@
 #define SECTION(x) printf(" --------- %s ---------\n", x);
 #define STRLEN(x) printf("`%s` = %d (%d)\n", x, ft_strlen(x), (int)strlen(x));
 #define STRCMP(a, b) printf("`%s`:`%s` = %d (%d)\n", a, b, ft_strcmp(a, b), strcmp(a, b));
+#define WRITE(s, x) printf("\t-\t%ld (`%s`:%ld)\n", ft_write(STDOUT_FILENO, s, x), s, x);
 
 void print_section(const char *title);
 
 int main(void)
 {
+    // char *null = 0;
     // int i;
     // char buffer[100];
 
@@ -38,16 +40,22 @@ int main(void)
     // printf("`%s` (NULL)\n", ft_strcpy(buffer, NULL));
     // print_section("done");
 
-    char *null = 0;
-    print_section("ft_strcmp");
-    STRCMP("", "");
-    STRCMP("toto", "toto");
-    STRCMP("", "toto");
-    STRCMP("toto", "");
-    STRCMP("toto", "totobar")
-    printf("`%s`:`%s` = %d\n", "TOTO", null, ft_strcmp("TOTO", null));
-    printf("`%s`:`%s` = %d\n", null, "TOTO", ft_strcmp(null, "TOTO"));
-    printf("`%s`:`%s` = %d\n", null, null, ft_strcmp(null, null));
+    // print_section("ft_strcmp");
+    // STRCMP("", "");
+    // STRCMP("toto", "toto");
+    // STRCMP("", "toto");
+    // STRCMP("toto", "");
+    // STRCMP("toto", "totobar")
+    // printf("`%s`:`%s` = %d\n", "TOTO", null, ft_strcmp("TOTO", null));
+    // printf("`%s`:`%s` = %d\n", null, "TOTO", ft_strcmp(null, "TOTO"));
+    // printf("`%s`:`%s` = %d\n", null, null, ft_strcmp(null, null));
+    // print_section("done");
+
+    print_section("ft_write");
+    WRITE("toto", 4L)
+    WRITE("totototo", 4L)
+    WRITE("totototo", 8L)
+    WRITE("toto", 2L)
     print_section("done");
 
     return (0);
