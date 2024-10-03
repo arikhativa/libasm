@@ -1,19 +1,5 @@
 
-; char	*ft_strdup(const char *s)
-; {
-; 	int		size;
-; 	char	*ret;
-
-; 	if (!s)
-; 		return (NULL);
-; 	size = ft_strlen(s);
-; 	ret = (char *)malloc(sizeof(char) * (size + 1));
-; 	if (!ret)
-; 		return (NULL);
-; 	ft_strlcpy(ret, s, size + 1);
-; 	return (ret);
-; }
-
+section	.text
 global ft_strdup
 extern ft_strlen
 extern ft_strcpy
@@ -23,35 +9,37 @@ ft_strdup:
 
 validation:
     test rdi, rdi
-    jz exit_null
+    jz exit_null        ; if (!s) return (NULL);
 
 call_ft_strlen:
-    push rdi ; store the src
+    push rdi            ; store the src param
     call ft_strlen
-call_malloc:
-    add rax, 1
-    push rax ; store the len
-    mov rdi, rax
-    call malloc
-    test rax, rax ; check if null
-    jz exit_error ; if null then exit
     
-    pop rcx ; get the len
+call_malloc:
+    add rax, 1          ; add 1 to len
+    mov rdi, rax        ; set malloc param to len
+    push rax            ; store the len
+
+    call malloc
+
+    test rax, rax
+    jz exit_error       ; if (!ret) return (NULL);
+    
+    pop rcx             ; get the len
     mov BYTE[rax + rcx - 1], 0
 
 copy_to_memory:
-    pop rsi ; get the src
-    mov rdi, rax
-    push rax
+    pop rsi             ; get the src param
+    mov rdi, rax        ; set ft_strcpy param to new mem address
+    push rax            ; store the new mem address
     call ft_strcpy
-    pop rax
+    pop rax             ; get new mem addrees
 
 exit:
     ret
 
 exit_error:
     mov rax, 0
-    leave
     ret
     
 exit_null:

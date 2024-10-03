@@ -83,6 +83,7 @@ int main(void)
     print_section("ft_strdup");
     tmp2 = ft_strdup("toto");
     printf("%s\n", tmp2);
+    free(tmp2);
     // printf("%d\n", (int)tmp2);
     // printf("%s\n", tmp2);
     // DUP(tmp2)

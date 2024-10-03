@@ -1,3 +1,4 @@
+section	.text
 global ft_read
 
 %define SYS_READ 0

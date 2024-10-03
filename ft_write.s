@@ -1,3 +1,4 @@
+section	.text
 global ft_write
 
 %define SYS_WRITE 1
