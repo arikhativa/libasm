@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
 
 #include "libasm.h"
 
@@ -10,6 +11,22 @@
 #define STRLEN(x) printf("`%s` = %d (%d)\n", x, ft_strlen(x), (int)strlen(x));
 #define STRCMP(a, b) printf("`%s`:`%s` = %d (%d)\n", a, b, ft_strcmp(a, b), strcmp(a, b));
 #define WRITE(s, x) printf("\t-\t%ld (`%s`:%ld)\n", ft_write(STDOUT_FILENO, s, x), s, x);
+
+#define WRITE_ERR(fd, s, x)      \
+    my_ret = ft_write(fd, s, x); \
+    my_errno = errno;            \
+    lib_ret = write(fd, s, x);   \
+    lib_errno = errno;           \
+    errno = 0l;                  \
+    printf("\t-\tret value: %ld (%ld), errno: %d (%d)\n", my_ret, lib_ret, my_errno, lib_errno);
+
+#define READ_ERR(fd, s, x)      \
+    my_ret = ft_read(fd, s, x); \
+    my_errno = errno;           \
+    lib_ret = read(fd, s, x);   \
+    lib_errno = errno;          \
+    errno = 0l;                 \
+    printf("\t-\tret value: %ld (%ld), errno: %d (%d)\n", my_ret, lib_ret, my_errno, lib_errno);
 
 #define READ(b, x)                        \
     r = ft_read(STDIN_FILENO, buffer, x); \
@@ -25,6 +42,12 @@ void print_section(const char *title);
 
 int main(void)
 {
+
+    ssize_t my_ret;
+    int my_errno;
+    ssize_t lib_ret;
+    int lib_errno;
+
     char *null = 0;
     long r;
     int i;
@@ -69,30 +92,34 @@ int main(void)
     // WRITE("totototo", 4L)
     // WRITE("totototo", 8L)
     // WRITE("toto", 2L)
+    // WRITE("toto", 2L)
+
+    // WRITE_ERR(2222, "toto", 4L)
+    // WRITE_ERR(1, "toto", -1)
+    // WRITE_ERR(1, null, 1)
+
     // print_section("done");
 
     // print_section("ft_read");
+
     // READ(buffer, 50)
     // READ(buffer, 25)
     // READ(buffer, 4)
     // READ(buffer, 26)
     // READ(buffer, 14)
     // READ(buffer, 0)
+    // READ_ERR(2222, buffer, 50)
+    // READ_ERR(0, buffer, -1)
     // print_section("done");
 
-    print_section("ft_strdup");
-    tmp2 = ft_strdup("toto");
-    printf("%s\n", tmp2);
-    free(tmp2);
-    // printf("%d\n", (int)tmp2);
-    // printf("%s\n", tmp2);
+    // print_section("ft_strdup");
     // DUP(tmp2)
     // free(tmp2);
     // DUP("totobar")
     // DUP("long message")
     // DUP("")
     // DUP(NULL)
-    print_section("done");
+    // print_section("done");
 
     return (0);
 }

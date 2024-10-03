@@ -47,7 +47,7 @@ fclean: clean
 re: fclean $(NAME)
 
 test: $(NAME)
-	$(CC) $(CFLAGS) -o $(TEST) main.c -L. -lasm 
+	$(CC) $(CFLAGS) -o $(TEST) main.c -L. -lasm
 	./$(TEST)
 
 bonus: $(OBJS) $(BONUS_OBJS)

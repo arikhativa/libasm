@@ -1,9 +1,12 @@
 
-section	.text
-global ft_strdup
-extern ft_strlen
-extern ft_strcpy
-extern	malloc
+section .text
+global  ft_strdup
+extern  ft_strlen
+extern  ft_strcpy
+extern  malloc
+
+extern  __errno_location
+%define EINVAL 22 ;TODO
 
 ft_strdup:
 
@@ -43,6 +46,9 @@ exit_error:
     ret
     
 exit_null:
+; TODO not sure if i should set errno here
+    call __errno_location
+    mov BYTE[rax], EINVAL
     mov rax, 0
     ret
 
