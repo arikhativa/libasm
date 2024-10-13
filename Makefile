@@ -12,10 +12,10 @@ SRCS		=	ft_strlen.s \
 OBJS		=	$(SRCS:.s=.o)
 
 BONUS_SRCS	=	ft_atoi_base_bonus.s \
-				ft_list_size_bonus.s \
-				ft_list_push_front_bonus.s \
-				ft_list_remove_if_bonus.s \
-				ft_list_sort_bonus.s
+				# ft_list_size_bonus.s \
+				# ft_list_push_front_bonus.s \
+				# ft_list_remove_if_bonus.s \
+				# ft_list_sort_bonus.s
 
 BONUS_OBJS	=	$(BONUS_SRCS:.s=.o)
 
@@ -51,10 +51,10 @@ test: $(NAME)
 	./$(TEST)
 
 bonus: $(OBJS) $(BONUS_OBJS)
-	$(AR) rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+	$(AR)  $(ARFLAGS) $(NAME) $(OBJS) $(BONUS_OBJS)
 
 test_bonus: bonus
-	$(CC) $(CFLAGS) -L. -lasm -o $(TEST_BONUS) main_bonus.c
+	$(CC) $(CFLAGS) -o $(TEST_BONUS) main_bonus.c -L. -lasm
 	./$(TEST_BONUS)
 
 .PHONY: clean fclean re test bonus test_bonus
