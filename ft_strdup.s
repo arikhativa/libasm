@@ -6,7 +6,7 @@ extern  ft_strcpy
 extern  malloc
 
 extern  __errno_location
-%define EINVAL 22 ;TODO
+%define EINVAL 22 ;
 
 ft_strdup:
 
@@ -29,7 +29,7 @@ call_malloc:
     jz exit_error       ; if (!ret) return (NULL);
     
     pop rcx             ; get the len
-    mov BYTE[rax + rcx - 1], 0
+    mov BYTE[rax + rcx - 1], 0  ; add '\0' to the end of the string
 
 copy_to_memory:
     pop rsi             ; get the src param
@@ -46,9 +46,8 @@ exit_error:
     ret
     
 exit_null:
-; TODO not sure if i should set errno here
-    call __errno_location
-    mov BYTE[rax], EINVAL
+    call __errno_location   ; get &errno
+    mov BYTE[rax], EINVAL   ; *errno = EINVAL
     mov rax, 0
     ret
 

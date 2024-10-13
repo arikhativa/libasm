@@ -7,23 +7,21 @@ ft_strcpy:
 
 validation:
     test rdi, rdi
-    jz exit_null
+    jz exit_null        ; if (!dest) return (NULL);
     test rsi, rsi
-    jz exit_null
+    jz exit_null        ; if (!src) return (NULL);
 
 loop:
     cmp BYTE[rsi], 0
-    jz  exit_loop
+    jz  exit            ; if (!*src) break;
     mov rdx, [rsi]
-    mov [rdi], rdx
-    inc rsi
-    inc rdi
+    mov [rdi], rdx      ; *dest = *src
+    inc rsi             ; ++src
+    inc rdi             ; ++dest
     jmp loop
 
-exit_loop:
-    mov BYTE[rdi], 0
-
 exit:
+    mov BYTE[rdi], 0    ; *dest = 0
     ret
 
 exit_null:

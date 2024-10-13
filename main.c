@@ -59,67 +59,67 @@ int main(void)
     while (i < 100)
         buffer[i++] = 0;
 
-    // print_section("ft_strlen");
-    // STRLEN("\t")
-    // STRLEN("")
-    // STRLEN("toto")
-    // STRLEN("totototo")
-    // STRLEN("0123456789abcdef")
-    // STRLEN("42")
-    // STRLEN("1")
-    // print_section("done");
+    print_section("ft_strlen");
+    STRLEN("\t")
+    STRLEN("")
+    STRLEN("toto")
+    STRLEN("totototo")
+    STRLEN("0123456789abcdef")
+    STRLEN("42")
+    STRLEN("1")
+    print_section("done");
 
-    // print_section("ft_strcpy");
-    // printf("`%s` (`toto`)\n", ft_strcpy(buffer, "toto"));
-    // printf("`%s` (empty)\n", ft_strcpy(buffer, ""));
-    // printf("`%s` (`long message`)\n", ft_strcpy(buffer, "long message"));
-    // printf("`%s` (NULL)\n", ft_strcpy(buffer, NULL));
-    // print_section("done");
+    print_section("ft_strcpy");
+    printf("`%s` (`toto`)\n", ft_strcpy(buffer, "toto"));
+    printf("`%s` (empty)\n", ft_strcpy(buffer, ""));
+    printf("`%s` (`long message`)\n", ft_strcpy(buffer, "long message"));
+    printf("`%s` (NULL)\n", ft_strcpy(buffer, NULL));
+    print_section("done");
 
-    // print_section("ft_strcmp");
-    // STRCMP("", "");
-    // STRCMP("toto", "toto");
-    // STRCMP("", "toto");
-    // STRCMP("toto", "");
-    // STRCMP("toto", "totobar")
-    // printf("`%s`:`%s` = %d\n", "TOTO", null, ft_strcmp("TOTO", null));
-    // printf("`%s`:`%s` = %d\n", null, "TOTO", ft_strcmp(null, "TOTO"));
-    // printf("`%s`:`%s` = %d\n", null, null, ft_strcmp(null, null));
-    // print_section("done");
+    print_section("ft_strcmp");
+    STRCMP("", "");
+    STRCMP("toto", "toto");
+    STRCMP("", "toto");
+    STRCMP("toto", "");
+    STRCMP("toto", "totobar")
+    printf("`%s`:`%s` = %d\n", "TOTO", null, ft_strcmp("TOTO", null));
+    printf("`%s`:`%s` = %d\n", null, "TOTO", ft_strcmp(null, "TOTO"));
+    printf("`%s`:`%s` = %d\n", null, null, ft_strcmp(null, null));
+    print_section("done");
 
-    // print_section("ft_write");
-    // WRITE("toto", 4L)
-    // WRITE("totototo", 4L)
-    // WRITE("totototo", 8L)
-    // WRITE("toto", 2L)
-    // WRITE("toto", 2L)
+    print_section("ft_write");
+    WRITE("toto", 4L)
+    WRITE("totototo", 4L)
+    WRITE("totototo", 8L)
+    WRITE("toto", 2L)
+    WRITE("toto", 2L)
 
-    // WRITE_ERR(2222, "toto", 4L)
-    // WRITE_ERR(1, "toto", -1)
-    // WRITE_ERR(1, null, 1)
+    WRITE_ERR(2222, "toto", 4L)
+    WRITE_ERR(1, "toto", -1)
+    WRITE_ERR(1, null, 1)
 
-    // print_section("done");
+    print_section("done");
 
-    // print_section("ft_read");
+    print_section("ft_read");
 
-    // READ(buffer, 50)
-    // READ(buffer, 25)
-    // READ(buffer, 4)
-    // READ(buffer, 26)
-    // READ(buffer, 14)
-    // READ(buffer, 0)
-    // READ_ERR(2222, buffer, 50)
-    // READ_ERR(0, buffer, -1)
-    // print_section("done");
+    READ(buffer, 50)
+    READ(buffer, 25)
+    READ(buffer, 4)
+    READ(buffer, 26)
+    READ(buffer, 14)
+    READ(buffer, 0)
+    READ_ERR(2222, buffer, 50)
+    READ_ERR(0, buffer, -1)
+    print_section("done");
 
-    // print_section("ft_strdup");
-    // DUP(tmp2)
-    // free(tmp2);
-    // DUP("totobar")
-    // DUP("long message")
-    // DUP("")
-    // DUP(NULL)
-    // print_section("done");
+    print_section("ft_strdup");
+    DUP(tmp2)
+    free(tmp2);
+    DUP("totobar")
+    DUP("long message")
+    DUP("")
+    DUP(null)
+    print_section("done");
 
     return (0);
 }

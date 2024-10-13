@@ -3,14 +3,18 @@ section	.text
 global ft_strlen
 
 ft_strlen:
-    xor rcx, rcx ; clear counter
+    xor rcx, rcx            ; int i = 0;
+
+validation:
+    test rdi, rdi
+    jz exit                 ; if (!s) return (NULL);
 
 loop:
     cmp BYTE[rdi + rcx], 0
-    jz  exit
-    inc rcx
+    jz  exit                ; if (!s[i]) break;
+    inc rcx                 ; ++i
     jmp loop
 
 exit:
-    mov rax, rcx
+    mov rax, rcx            ; int ret = i;
     ret
