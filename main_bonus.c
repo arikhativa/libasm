@@ -14,7 +14,7 @@ void print_section(const char *title);
 int main(void)
 {
     print_section("ft_atoi_base");
-    int ret = ft_atoi_base("     + 123", "12");
+    int ret = ft_atoi_base("   -a f", "0123456789abcdef");
     printf("%d\n", ret);
     print_section("done");
     // int tt = atoi("   123");

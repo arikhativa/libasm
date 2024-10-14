@@ -20,8 +20,8 @@ call_ft_strlen:
     push rdi            ; store base
     call ft_strlen      ; len = ft_strlen(base)
     cmp rax, 1          
-    jle exit_error_clear_stack       ; if (len <= 1) exit
-
+    jle exit_error_clear_stack      ; if (len <= 1) exit
+    mov r12, rax                    ; r12 = base.len
 
 
 check_base_if_unique:
@@ -68,42 +68,54 @@ check_base_if_unique:
 skip_whitespaces:
     pop r11             ; r11 = s
     mov r8, r11         ; r8 = s
-    xor rcx, rcx        ; i = 0
 
     .loop:
-        mov dil, BYTE[r8 + rcx]
+        mov dil, BYTE[r8]
         call is_whitespaces
         test rax, rax
         jz .exit_loop                ; if (!is_whitespaces(s[i])) break
-        inc rcx
+        inc r8
         jmp .loop
 
     .exit_loop:
-handle_sign:
-    mov dil, BYTE[r8 + rcx]
+check_if_sign:
+    mov r9, 1                   ; sign = r9 = 1
+    mov dil, BYTE[r8]
     cmp dil, '+'
-    je handle_sign_done
+    je .handle_sign_done
     cmp dil, '-'
-    mov r9, 1                   ; sign = r9
-    jne handle_sign_done
-    mov r9, -1                  ; sign = -1
+    je .handle_sign_minus
+    jmp .skip_sign
 
-handle_sign_done:
-    inc rcx
+    .handle_sign_minus:
+        mov r9, -1                  ; sign = -1
 
-    mov dil, BYTE[r8 + rcx]
-    call is_number
-    test rax, rax
-    jz exit_error
+    .handle_sign_done:
+        inc r8
 
-    mov rax, 66
-    ret
+    .skip_sign:
+
+loop_str:
+    mov rdx, 0                  ; rdx = result
+    .loop:
+        mov dil, BYTE[r8]       ; ch = *s
+        call get_value          ; rax = get_value(ch, base)
+        cmp rax, -1
+        je .exit_loop
+        mov rcx, rax            ; rcx = value
+        mov rax, r12            ; rax = base_len
+        mul rdx                 ; rax = result * base_len
+        add rax, rcx            ; result + value
+        mov rdx, rax            ; rdx = result
+        inc r8
+        jmp .loop
+
+    .exit_loop:
 
 exit:
-    pop rdi
-    mov rax, -2
+    mov rax, rdx
+    mul r9
     ret
-    
 
 exit_error_clear_stack:
     pop rdi
@@ -112,7 +124,7 @@ exit_error_clear_stack:
     ret
 
 exit_error:
-    mov rax, 0
+    mov rax, -22
     ret
 
 
@@ -121,16 +133,27 @@ exit_bad_base:
     mov rax, -3
     ret
 
-aaa:
-    pop rdi
-    mov rax, -33
-    ret
-bbb:
-    pop rdi
-    mov rax, -23
-    ret
 
 ; Functions
+
+get_value:
+    mov rsi, 0                      ; i = 0
+    .loop:
+        cmp BYTE[r10 + rsi], 0      ; if (!base[i]) break
+        je .exit_loop
+        mov al, BYTE[r10 + rsi]     ; tmp = base[i] 
+        cmp al, dil                 ; if (tmp == ch) -> exit_loop
+        je .exit_success
+        inc rsi                     ; ++i
+        jmp .loop
+
+    .exit_loop:
+        mov rax, -1                 ; return -1
+        ret
+
+    .exit_success:
+        mov rax, rsi                ; return i
+        ret
 
 is_whitespaces:
     cmp dil, ' '
