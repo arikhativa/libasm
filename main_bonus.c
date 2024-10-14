@@ -14,9 +14,11 @@ void print_section(const char *title);
 int main(void)
 {
     print_section("ft_atoi_base");
-    int ret = ft_atoi_base("123", "12");
+    int ret = ft_atoi_base("     + 123", "12");
     printf("%d\n", ret);
     print_section("done");
+    // int tt = atoi("   123");
+    // printf("%d\n", tt);
 
     return (0);
 }

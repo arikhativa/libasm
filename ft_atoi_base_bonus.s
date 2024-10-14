@@ -2,6 +2,7 @@ section	.text
 global ft_atoi_base
 extern ft_strlen
 
+
 ft_atoi_base:
 validation:
     test rdi, rdi
@@ -69,23 +70,34 @@ skip_whitespaces:
     mov r8, r11         ; r8 = s
     xor rcx, rcx        ; i = 0
 
-    .loop
+    .loop:
         mov dil, BYTE[r8 + rcx]
         call is_whitespaces
         test rax, rax
-        jz exit_loop                ; if (!is_whitespaces(s[i])) break
+        jz .exit_loop                ; if (!is_whitespaces(s[i])) break
         inc rcx
         jmp .loop
 
     .exit_loop:
+handle_sign:
+    mov dil, BYTE[r8 + rcx]
+    cmp dil, '+'
+    je handle_sign_done
+    cmp dil, '-'
+    mov r9, 1                   ; sign = r9
+    jne handle_sign_done
+    mov r9, -1                  ; sign = -1
 
-    // Handle optional '+' and '-' signs TODO
+handle_sign_done:
+    inc rcx
 
+    mov dil, BYTE[r8 + rcx]
+    call is_number
+    test rax, rax
+    jz exit_error
 
-
-        pop rdi
-        mov rax, 66
-        ret
+    mov rax, 66
+    ret
 
 exit:
     pop rdi
@@ -118,6 +130,7 @@ bbb:
     mov rax, -23
     ret
 
+; Functions
 
 is_whitespaces:
     cmp dil, ' '
@@ -139,3 +152,32 @@ is_whitespaces:
 set_is_whitespaces:
     mov rax, 1
     ret
+
+is_number:
+    cmp dil, '0'
+    je .set_is_digit
+    cmp dil, '1'
+    je .set_is_digit
+    cmp dil, '2'
+    je .set_is_digit
+    cmp dil, '3'
+    je .set_is_digit
+    cmp dil, '4'
+    je .set_is_digit
+    cmp dil, '5'
+    je .set_is_digit
+    cmp dil, '6'
+    je .set_is_digit
+    cmp dil, '7'
+    je .set_is_digit
+    cmp dil, '8'
+    je .set_is_digit
+    cmp dil, '9'
+    je .set_is_digit
+
+    mov rax, 0
+    ret
+
+    .set_is_digit:
+        mov rax, 1
+        ret

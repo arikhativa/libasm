@@ -48,12 +48,15 @@ int ft_atoi_base(char *str, char *base)
         str++;
 
     // Handle optional '+' and '-' signs
-    while (*str == '+' || *str == '-')
+    if (*str == '+' || *str == '-')
     {
         if (*str == '-')
             sign *= -1;
         str++;
     }
+
+    if (not a number)
+        return 0;
 
     base_len = 0;
     while (base[base_len])
